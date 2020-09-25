@@ -6,7 +6,9 @@ use serde_yaml;
 /// Config struct.
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct Config {
+    pub subject: String,
     pub sender_addr: String,
+    pub sender_name: String,
     pub smtp_srv: String,
     pub smtp_port: u64,
     pub smtp_usr: String,
@@ -17,7 +19,9 @@ pub struct Config {
 impl Config {
     pub fn new() -> Self {
         Self {
+            subject: "Some Message Subject".to_string(),
             sender_addr: "info@domain.com".to_string(),
+            sender_name: "Domain".to_string(),
             smtp_srv: "smtp.domain.com".to_string(),
             smtp_port: 465,
             smtp_usr: "info@domain.com".to_string(),
@@ -47,5 +51,9 @@ impl Config {
             Err(e) => panic!("{}", e),
             _ => {}
         }
+    }
+
+    pub fn recipients_tuple(&self) -> Vec<(String, String)> {
+        self.recipients.iter().map(|&x| (x, String::from(""))).collect()
     }
 }

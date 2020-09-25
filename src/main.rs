@@ -31,7 +31,7 @@ fn main() {
                 )
                 .arg(
                     Arg::new("message")
-                        .about("path to text file with the message in it")
+                        .about("path to text file with the message, first line is subject")
                         .long("message")
                         .short('m')
                         .required(true)
